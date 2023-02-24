@@ -1,0 +1,16 @@
+<div class="container">
+  <mat-form-field>
+    <mat-label>Enter a value</mat-label>
+    <input matInput #input type="text" [(ngModel)]="qrCodeStr" (keyup)="generate(input.value)">
+    <button *ngIf="qrCodeStr" matSuffix mat-icon-button aria-label="Clear" (click)="qrCodeStr=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <qrcode (qrCodeURL)="onChangeURL($event)"
+          [qrdata]="qrCodeStr"
+          [width]="300"
+          [errorCorrectionLevel]="'M'"
+          [allowEmptyString]=true
+  ></qrcode>
+  <a mat-raised-button color="primary" [href]="qrCodeDownloadLink" download="qrcode">Download</a>
+</div>
